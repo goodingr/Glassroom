@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GlassTest</string>
+    <string name="title_activity_main">EECS 183</string>
+    <string name="hello_world">Functions:
+        void foo(string str);</string>
+
+</resources>
