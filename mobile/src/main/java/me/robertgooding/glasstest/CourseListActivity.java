@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.firebase.client.Firebase;
+
 
 /**
  * An activity representing a list of Courses. This activity
@@ -33,6 +35,7 @@ public class CourseListActivity extends FragmentActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_course_list);
 
         if (findViewById(R.id.course_detail_container) != null) {

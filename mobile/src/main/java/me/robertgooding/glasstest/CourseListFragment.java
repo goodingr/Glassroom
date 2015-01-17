@@ -8,7 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-import me.robertgooding.glasstest.dummy.DummyContent;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import me.robertgooding.glasstest.course.CourseContent;
+import me.robertgooding.glasstest.course.CourseContent;
 
 /**
  * A list fragment representing a list of Courses. This fragment
@@ -71,12 +81,15 @@ public class CourseListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        String[] coursesString = {"EECS 183", "Math 115", "Phys 140"};
+        List<String> coursesArray = Arrays.asList(coursesString);
+
         // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
+        setListAdapter(new ArrayAdapter(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                DummyContent.ITEMS));
+                coursesArray));
     }
 
     @Override
@@ -116,7 +129,7 @@ public class CourseListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected("EECS 183");
     }
 
     @Override
