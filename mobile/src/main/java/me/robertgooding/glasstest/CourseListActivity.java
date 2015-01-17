@@ -1,8 +1,11 @@
 package me.robertgooding.glasstest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+
+import com.dropbox.sync.android.*;
 
 
 /**
@@ -30,10 +33,21 @@ public class CourseListActivity extends FragmentActivity
      */
     private boolean mTwoPane;
 
+    private DbxAccountManager mDbxAcctMgr;
+    static final int REQUEST_LINK_TO_DBX = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_course_list);
+        try {
+            mDbxAcctMgr = DbxAccountManager.getInstance(getApplicationContext(), "gsfsr29glmytywt", "c23fgx4tp3ugc06");
+        }
+        catch(DbxAccountManager.ConfigurationMismatchException e){
+
+        }
+        mDbxAcctMgr.startLink((Activity)this, REQUEST_LINK_TO_DBX);
 
         if (findViewById(R.id.course_detail_container) != null) {
             // The detail container view will be present only in the
@@ -50,6 +64,19 @@ public class CourseListActivity extends FragmentActivity
         }
 
         // TODO: If exposing deep links into your app, handle intents here.
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_LINK_TO_DBX) {
+            if (resultCode == Activity.RESULT_OK) {
+                // ... Start using Dropbox files.
+            } else {
+                // ... Link failed or was cancelled by the user.
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     /**
